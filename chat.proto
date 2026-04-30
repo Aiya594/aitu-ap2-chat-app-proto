@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package chat;
 
-option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/chat;chat";
+option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/gen/chat;chat";
 
 service ChatService {
   rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);

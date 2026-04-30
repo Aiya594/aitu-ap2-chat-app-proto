@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package notification;
 
-option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/notification;notification";
+option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/gen/notification;notification";
 
 service NotificationService {
   rpc SendEmail(SendEmailRequest) returns (SendEmailResponse);

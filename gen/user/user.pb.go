@@ -474,7 +474,7 @@ const file_user_proto_rawDesc = "" +
 	"\vGetUserById\x12\x18.user.GetUserByIdRequest\x1a\x19.user.GetUserByIdResponse\x12?\n" +
 	"\n" +
 	"UpdateUser\x12\x17.user.UpdateUserRequest\x1a\x18.user.UpdateUserResponse\x12B\n" +
-	"\vSearchUsers\x12\x18.user.SearchUsersRequest\x1a\x19.user.SearchUsersResponseB@Z>github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/user;userb\x06proto3"
+	"\vSearchUsers\x12\x18.user.SearchUsersRequest\x1a\x19.user.SearchUsersResponseB:Z8github.com/Aiya594/aitu-ap2-chat-app-proto/gen/user;userb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
