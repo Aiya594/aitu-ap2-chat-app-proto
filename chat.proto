@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/chat;chat";
+
+service ChatService {
+  rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+  rpc MarkAsRead(MarkAsReadRequest) returns (MarkAsReadResponse);
+}
+
+// ─── Shared messages ─────────────────────────────────────────────────────────
+
+enum ChatType {
+  CHAT_TYPE_UNSPECIFIED = 0;
+  PRIVATE               = 1; // 1-to-1
+  GROUP                 = 2; // Optional bonus feature
+}
+
+message Chat {
+  string   chat_id    = 1;
+  ChatType type       = 2;
+  repeated string member_ids = 3;
+  int64    created_at = 4;
+}
+
+message Message {
+  string chat_id    = 1;
+  string message_id = 2;
+  string sender_id  = 3;
+  string content    = 4;
+  bool   read       = 5;
+  int64  created_at = 6;
+}
+
+// ─── CreateChat ──────────────────────────────────────────────────────────────
+
+message CreateChatRequest {
+  ChatType type       = 1;
+  repeated string member_ids = 2; // For PRIVATE: exactly 2 user IDs
+}
+
+message CreateChatResponse {
+  Chat   chat    = 1;
+  string message = 2; // "Chat created" | "Chat already exists"
+}
+
+// ─── SendMessage ─────────────────────────────────────────────────────────────
+
+message SendMessageRequest {
+  string chat_id   = 1;
+  string sender_id = 2;
+  string content   = 3;
+}
+
+message SendMessageResponse {
+  Message message = 1; // Full persisted message with ID and timestamp
+}
+
+// ─── GetMessages ─────────────────────────────────────────────────────────────
+
+message GetMessagesRequest {
+  string chat_id       = 1;
+  string requester_id  = 2; // Used to scope read status
+  int32  page          = 3; // 0-based, newest first
+  int32  per_page      = 4; // Default 20, max 100
+  int64  before_ts     = 5; // Optional cursor — fetch messages older than this Unix timestamp
+}
+
+message GetMessagesResponse {
+  repeated Message messages   = 1;
+  bool             has_more   = 2;
+  int64            next_cursor = 3; // Pass as before_ts for next page
+}
+
+// ─── MarkAsRead ──────────────────────────────────────────────────────────────
+
+message MarkAsReadRequest {
+  string chat_id   = 1;
+  string user_id   = 2;
+  string up_to_message_id = 3; // Mark all messages up to (and including) this ID as read
+}
+
+message MarkAsReadResponse {
+  int32  updated_count = 1; // How many messages were marked read
+  string message       = 2;
+}

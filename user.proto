@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/user;user";
+
+service UserService {
+  rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+}
+
+// ─── Shared message ──────────────────────────────────────────────────────────
+
+message UserProfile {
+  string user_id    = 1;
+  string name       = 2;
+  string email      = 3;
+  string avatar_url = 4;
+  string status     = 5; // "online" | "offline" | custom text
+  int64  created_at = 6;
+  int64  updated_at = 7;
+}
+
+// ─── GetUserById ─────────────────────────────────────────────────────────────
+
+message GetUserByIdRequest {
+  string user_id = 1;
+}
+
+message GetUserByIdResponse {
+  UserProfile user = 1;
+}
+
+// ─── UpdateUser ──────────────────────────────────────────────────────────────
+
+message UpdateUserRequest {
+  string user_id    = 1;
+  string name       = 2; // Optional — only update fields that are set
+  string avatar_url = 3;
+  string status     = 4;
+}
+
+message UpdateUserResponse {
+  UserProfile user    = 1;
+  string      message = 2; // "Profile updated"
+}
+
+// ─── SearchUsers ─────────────────────────────────────────────────────────────
+
+message SearchUsersRequest {
+  string query    = 1; // Search by name or email prefix
+  int32  page     = 2; // 0-based
+  int32  per_page = 3; // Max 50
+}
+
+message SearchUsersResponse {
+  repeated UserProfile users = 1;
+  int32                total = 2;
+}

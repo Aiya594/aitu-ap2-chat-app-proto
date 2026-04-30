@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/notification;notification";
+
+service NotificationService {
+  rpc SendEmail(SendEmailRequest) returns (SendEmailResponse);
+}
+
+// ─── SendEmail ───────────────────────────────────────────────────────────────
+
+enum EmailTemplate {
+  EMAIL_TEMPLATE_UNSPECIFIED = 0;
+  WELCOME                    = 1; // Sent on user registration
+  NEW_MESSAGE                = 2; // Sent when user receives a message (optional)
+  PASSWORD_RESET             = 3; // Future use
+}
+
+message SendEmailRequest {
+  string        to_email  = 1;
+  string        to_name   = 2;
+  EmailTemplate template  = 3;
+  map<string, string> data = 4; // Template variables, e.g. {"sender_name": "Alice", "preview": "Hey!"}
+}
+
+message SendEmailResponse {
+  bool   success   = 1;
+  string message   = 2; // "Email sent" | error description
+  string message_id = 3; // SMTP message ID for tracing
+}

@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/auth;auth";
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+}
+
+// ─── Register ────────────────────────────────────────────────────────────────
+
+message RegisterRequest {
+  string email    = 1;
+  string password = 2;
+  string name     = 3;
+}
+
+message RegisterResponse {
+  string user_id    = 1;
+  string email      = 2;
+  string message    = 3; // "User registered successfully"
+}
+
+// ─── Login ───────────────────────────────────────────────────────────────────
+
+message LoginRequest {
+  string email    = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string access_token  = 1; // Short-lived JWT (15m)
+  string refresh_token = 2; // Long-lived token (7d)
+  string user_id       = 3;
+  int64  expires_at    = 4; // Unix timestamp
+}
+
+// ─── ValidateToken ───────────────────────────────────────────────────────────
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool   valid   = 1;
+  string user_id = 2;
+  string email   = 3;
+  int64  exp     = 4; // Token expiry as Unix timestamp
+}
+
+// ─── RefreshToken ─────────────────────────────────────────────────────────────
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshTokenResponse {
+  string access_token  = 1;
+  string refresh_token = 2; // Rotated refresh token
+  int64  expires_at    = 3;
+}
