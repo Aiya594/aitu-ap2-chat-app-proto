@@ -742,7 +742,7 @@ const file_chat_proto_rawDesc = "" +
 	"\vSendMessage\x12\x18.chat.SendMessageRequest\x1a\x19.chat.SendMessageResponse\x12B\n" +
 	"\vGetMessages\x12\x18.chat.GetMessagesRequest\x1a\x19.chat.GetMessagesResponse\x12?\n" +
 	"\n" +
-	"MarkAsRead\x12\x17.chat.MarkAsReadRequest\x1a\x18.chat.MarkAsReadResponseB7Z5github.com/Aiya594/chat-app-proto/proto/gen/chat;chatb\x06proto3"
+	"MarkAsRead\x12\x17.chat.MarkAsReadRequest\x1a\x18.chat.MarkAsReadResponseB@Z>github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/chat;chatb\x06proto3"
 
 var (
 	file_chat_proto_rawDescOnce sync.Once

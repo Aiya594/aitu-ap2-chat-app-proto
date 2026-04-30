@@ -225,7 +225,7 @@ const file_notification_proto_rawDesc = "" +
 	"\vNEW_MESSAGE\x10\x02\x12\x12\n" +
 	"\x0ePASSWORD_RESET\x10\x032c\n" +
 	"\x13NotificationService\x12L\n" +
-	"\tSendEmail\x12\x1e.notification.SendEmailRequest\x1a\x1f.notification.SendEmailResponseBGZEgithub.com/Aiya594/chat-app-proto/proto/gen/notification;notificationb\x06proto3"
+	"\tSendEmail\x12\x1e.notification.SendEmailRequest\x1a\x1f.notification.SendEmailResponseBPZNgithub.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/notification;notificationb\x06proto3"
 
 var (
 	file_notification_proto_rawDescOnce sync.Once

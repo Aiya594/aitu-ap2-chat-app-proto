@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/user;user";
+option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/user;user";
 
 service UserService {
   rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse);

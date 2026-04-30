@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth;
 
-option go_package = "github.com/Aiya594/chat-app-proto/proto/gen/auth;auth";
+option go_package = "github.com/Aiya594/aitu-ap2-chat-app-proto/proto/gen/auth;auth";
 
 service AuthService {
   rpc Register(RegisterRequest) returns (RegisterResponse);
