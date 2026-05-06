@@ -9,6 +9,7 @@ service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
   rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
 }
 
 // ─── Register ────────────────────────────────────────────────────────────────
@@ -62,4 +63,16 @@ message RefreshTokenResponse {
   string access_token  = 1;
   string refresh_token = 2; // Rotated refresh token
   int64  expires_at    = 3;
+}
+
+
+// ─── Logout ─────────────────────────────────────────────────────────────
+
+message LogoutRequest {
+  string access_token  = 1;
+  string refresh_token = 2;
+}
+
+message LogoutResponse {
+  string message = 1; // "Logged out successfully"
 }
